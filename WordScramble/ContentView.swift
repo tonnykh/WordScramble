@@ -60,9 +60,16 @@ struct ContentView: View {
             return
         }
         
-      
+        guard isMoreThanTwoLetters(word: answer) else {
+            wordError(title: "Word is less than 2 letters", message: "You can make it to more than two letters")
+            return
+        }
         
-       
+        guard isDifferentfromRootWord(word: answer) else {
+            wordError(title: "Word is same as Root word", message: "Be more original!")
+            return
+        }
+        
         withAnimation() {
             usedWords.insert(answer, at: 0)
         }
@@ -106,7 +113,13 @@ struct ContentView: View {
         return misspelledRange.location == NSNotFound
     }
     
-   
+    func isMoreThanTwoLetters(word: String) -> Bool {
+        word.count > 2 ? true : false
+    }
+    
+    func isDifferentfromRootWord(word: String) -> Bool {
+        !rootWord.contains(word)
+    }
     
     func wordError(title: String, message: String) {
         errorTitle = title
