@@ -38,7 +38,13 @@ struct ContentView: View {
             } message: {
                  Text(errorMessage)
             }
+            .toolbar {
+                Button("New Root word") {
+                    startGame()
+                }
+            }
         }
+        
     }
     
     func addNewWord() {
@@ -118,7 +124,10 @@ struct ContentView: View {
     }
     
     func isDifferentfromRootWord(word: String) -> Bool {
-        !rootWord.contains(word)
+        if rootWord.count == word.count {
+            return !rootWord.contains(word)
+        }
+         return true
     }
     
     func wordError(title: String, message: String) {
